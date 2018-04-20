@@ -7,8 +7,8 @@
     <ProjectGuid>{B2EF3780-0817-47BA-AAD6-3F7698FEDD20}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MiniChat</RootNamespace>
-    <AssemblyName>MiniChat</AssemblyName>
+    <RootNamespace>NanoChat</RootNamespace>
+    <AssemblyName>NanoChat</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>

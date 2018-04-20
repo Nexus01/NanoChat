@@ -1,0 +1,14 @@
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.csprojResolveAssemblyReference.cache
+D:\csharp\NanoChat\Client\obj\Release\WindowsFormsApplication2.Form1.resources
+D:\csharp\NanoChat\Client\obj\Release\WindowsFormsApplication2.Form2.resources
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.csproj.GenerateResource.Cache
+D:\csharp\NanoChat\Client\bin\Release\NanoChat.exe.config
+D:\csharp\NanoChat\Client\bin\Release\NanoChat.exe.manifest
+D:\csharp\NanoChat\Client\bin\Release\NanoChat.application
+D:\csharp\NanoChat\Client\bin\Release\NanoChat.exe
+D:\csharp\NanoChat\Client\bin\Release\NanoChat.pdb
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.Properties.Resources.resources
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.exe.manifest
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.application
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.exe
+D:\csharp\NanoChat\Client\obj\Release\NanoChat.pdb

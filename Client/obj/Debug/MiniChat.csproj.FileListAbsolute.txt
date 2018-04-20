@@ -42,3 +42,6 @@ D:\csharp\nanochat\MiniChat\obj\Debug\MiniChat.application
 D:\csharp\nanochat-old\MiniChat\bin\Debug\MiniChat.exe.config
 D:\csharp\nanochat-old\MiniChat\obj\Debug\MiniChat.exe
 D:\csharp\nanochat-old\MiniChat\obj\Debug\MiniChat.pdb
+D:\csharp\NanoChat\Client\bin\Debug\MiniChat.exe.config
+D:\csharp\NanoChat\Client\obj\Debug\MiniChat.exe
+D:\csharp\NanoChat\Client\obj\Debug\MiniChat.pdb
