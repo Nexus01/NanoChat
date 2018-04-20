@@ -1,0 +1,9 @@
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\bin\Debug\NanoChatServer.exe.config
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.csprojResolveAssemblyReference.cache
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\bin\Debug\NanoChatServer.exe
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\bin\Debug\NanoChatServer.pdb
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.exe
+D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.pdb
+D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\bin\Debug\NanoChatServer.exe.config
+D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.exe
+D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.pdb
