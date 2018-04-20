@@ -7,3 +7,6 @@ D:\csharp\nanochat\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatSer
 D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\bin\Debug\NanoChatServer.exe.config
 D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.exe
 D:\csharp\nanochat-old\C#-Server\NanoChatServer\NanoChatServer\obj\Debug\NanoChatServer.pdb
+D:\csharp\NanoChat\Server\NanoChatServer\bin\Debug\NanoChatServer.exe.config
+D:\csharp\NanoChat\Server\NanoChatServer\obj\Debug\NanoChatServer.exe
+D:\csharp\NanoChat\Server\NanoChatServer\obj\Debug\NanoChatServer.pdb
