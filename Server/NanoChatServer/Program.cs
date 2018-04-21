@@ -50,40 +50,71 @@ namespace NanoChatServer
             }
             byte[] myReadBuffer = new byte[1024];
             int numberofinput = 0;
+            static string originmsg;
             public void run()
             {
                 try
                 {
                     NetworkStream networkStream = new NetworkStream(tsocket);
+                    bool GBK = false;
+                    
                     //msg = "[IP:" + IPAddress.Parse(((IPEndPoint)tsocket.LocalEndPoint).Address.ToString()) + "已上线] 在线人数:" + clients.Count;
                     msg = "[IP:" + IPAddress.Parse(((IPEndPoint)tsocket.LocalEndPoint).Address.ToString()) + " online] the number of online is:" + clients.Count;
                     myReadBuffer = Encoding.UTF8.GetBytes(msg);
-                    sendMsg(msg.Length); //上线推送
-                    while(true)
-                    //while (!string.ReferenceEquals((msg = Encoding.UTF8.GetString(myReadBuffer)), null))
-                    {
-                        //int result = ;
-                        if ((numberofinput=networkStream.Read(myReadBuffer, 0, myReadBuffer.Length)) < 0)
-                            break;
-                        msg = Encoding.UTF8.GetString(myReadBuffer,0,numberofinput);
-                        if (msg.Equals("exitthis"))
-                        { //如果收到exitthis则退出线程，回收socket。
-                            clients.RemoveAt(id);
-                            break;
-                        }
-                        sendMsg(numberofinput); //推送消息到所有客户端
+                    sendMsg(msg.Length,GBK); //上线推送
+                    tsocket.Receive(myReadBuffer);
+                    //byte[] unix = BitConverter.GetBytes(OSHelper.IsUnix);
+                    byte[] gb;
+                    //bool clientunix=false;
+                    if (!(Convert.ToBoolean(myReadBuffer[0])))
+                    { //^Convert.ToBoolean(unix[0]))
+                        GBK = true;
                     }
+                        while (true)
+                        //while (!string.ReferenceEquals((msg = Encoding.UTF8.GetString(myReadBuffer)), null))
+                        {
+                            //int result = ;
+                            if ((numberofinput = networkStream.Read(myReadBuffer, 0, myReadBuffer.Length)) < 0)
+                                break;
+
+                            msg = Encoding.UTF8.GetString(myReadBuffer, 0, numberofinput);
+         
+                            if (GBK)
+                            {
+                                originmsg = msg;
+                                //Encoding gbk=Encoding.GetEncoding("GBK");
+                                //Encoding utf8 = Encoding.UTF8;
+                                msg = Encoding.GetEncoding("GBK").GetString(Encoding.UTF8.GetBytes(msg));
+                                //gb= Encoding.GetEncoding("GBK").GetBytes(msg);
+                                //gb = Encoding.Convert(Encoding.GetEncoding("GBK"), Encoding.UTF8, gb);
+                            }
+                            if (msg.Equals("exitthis"))
+                            { //如果收到exitthis则退出线程，回收socket。
+                                clients.RemoveAt(id);
+                                break;
+                            }
+                            //msg=Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(msg));
+                            sendMsg(numberofinput,GBK); //推送消息到所有客户端
+                        }
+                    
                 }
                 catch (Exception)
                 {
                 }
             }
             //发送信息
-            public void sendMsg(int number)
+            public void sendMsg(int number,bool GBK)
             {
                 try
                 {
-                    Console.WriteLine(msg);
+                    if (GBK)
+                    {
+                        //string originmsg = Encoding.UTF8.GetString(Encoding.Convert(Encoding.GetEncoding("GBK"), Encoding.UTF8, Encoding.GetEncoding("GBK").GetBytes(msg)));
+                        msg = Encoding.GetEncoding("GBK").GetString(Encoding.Convert(Encoding.GetEncoding("GBK"), Encoding.UTF8, Encoding.GetEncoding("GBK").GetBytes(msg)));
+                        Console.WriteLine(originmsg);
+                    }
+                    else
+                        Console.WriteLine(msg);
                     for (int i = clients.Count - 1; i >= 0; i--)
                     { //循环推送
                         NetworkStream pw = new NetworkStream(clients[i]);
@@ -93,6 +124,17 @@ namespace NanoChatServer
                 }
                 catch (Exception)
                 {
+                }
+            }
+        }
+        public class OSHelper
+        {
+
+            public static bool IsUnix
+            {
+                get
+                {
+                    return Environment.OSVersion.Platform == PlatformID.Unix;
                 }
             }
         }

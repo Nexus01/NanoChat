@@ -21,6 +21,7 @@ namespace WindowsFormsApplication2
         Thread thread;//子线程对象
         Socket newclient;//Socket网络对象
         int flag ;//网络标志
+        //bool unix = false;
         public Form2(Form f1,String ip,String name,String port)
         {
             this.f1 = f1;//接收登录窗口form1对象
@@ -47,7 +48,8 @@ namespace WindowsFormsApplication2
             
         }
         private void recv()//子线程
-        { 
+        {
+            
             byte[] data = new byte[1024];//byte数据类型，用于保存接受的socket数据
             newclient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//实例化socket对象
             try
@@ -82,13 +84,16 @@ namespace WindowsFormsApplication2
                 }
             }
             int recv = newclient.Receive(data);//接收服务器上线数据
-            string stringdata = Encoding.Default.GetString(data, 0, recv);//将byte数据转化为字符类型
+            string stringdata = Encoding.UTF8.GetString(data, 0, recv);//将byte数据转化为字符类型
             UpdateList(stringdata);//传入ui数据并刷新
+            //if(unix=(OSHelper.IsUnix))
+            //data[0]=0x01;
+            newclient.Send(BitConverter.GetBytes(OSHelper.IsUnix));
             while (true)
             {
                 data = new byte[1024];//byte数据类型，用于保存接受的socket数据
                 recv = newclient.Receive(data);//接收消息数据
-                stringdata = Encoding.Default.GetString(data, 0, recv);//将byte数据转化为字符类型
+                stringdata = Encoding.UTF8.GetString(data, 0, recv);//将byte数据转化为字符类型
                 UpdateList(stringdata);//传入ui数据并刷新
             }
 
@@ -150,6 +155,17 @@ namespace WindowsFormsApplication2
                 }
             }
             return base.ProcessDialogKey(keyData);
+        }
+        public class OSHelper
+        {
+            
+            public static bool IsUnix
+            {
+                get
+                {
+                    return Environment.OSVersion.Platform == PlatformID.Unix;
+                }
+            }
         }
     }
 }
