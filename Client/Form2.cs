@@ -16,7 +16,7 @@ namespace WindowsFormsApplication2
     public partial class Form2 : Form
     {
         Form f1;//用于保存form1传过来的对象
-        String ip, name,port;//传过来的ip和name
+        String ip, name,port;//传过来的ip，name和port
         IPAddress ipdomain;//传过来的domain
         Thread thread;//子线程对象
         Socket newclient;//Socket网络对象
@@ -69,8 +69,8 @@ namespace WindowsFormsApplication2
             }
             catch (FormatException)
             {
-                ipdomain = Dns.GetHostAddresses(ip)[0];
-                IPEndPoint ie = new IPEndPoint(ipdomain,int.Parse(port));
+                ipdomain = Dns.GetHostAddresses(ip)[0];//DNS解析域名
+                IPEndPoint ie = new IPEndPoint(ipdomain, int.Parse(port));//设置ip地址与端口号
                 try
                 {
                     newclient.Connect(ie);//开始连接
@@ -86,9 +86,7 @@ namespace WindowsFormsApplication2
             int recv = newclient.Receive(data);//接收服务器上线数据
             string stringdata = Encoding.UTF8.GetString(data, 0, recv);//将byte数据转化为字符类型
             UpdateList(stringdata);//传入ui数据并刷新
-            //if(unix=(OSHelper.IsUnix))
-            //data[0]=0x01;
-            newclient.Send(BitConverter.GetBytes(OSHelper.IsUnix));
+            newclient.Send(BitConverter.GetBytes(OSHelper.IsUnix));//将判断是否为unix系统的结果发送给服务端
             while (true)
             {
                 data = new byte[1024];//byte数据类型，用于保存接受的socket数据
@@ -132,7 +130,7 @@ namespace WindowsFormsApplication2
                 {
                     newclient.Send(Encoding.UTF8.GetBytes(name + ":" + textBox1.Text + "\n"));//发送socket消息，并编码UTF-8
                     textBox1.Text = "";//清空发送栏
-                    textBox1.Focus();
+                    textBox1.Focus();//将光标聚焦在输入框
                 }
             }
         }
@@ -142,7 +140,7 @@ namespace WindowsFormsApplication2
             {
                 if (keyData == Keys.Enter && !this.button1.Focused)
                 {
-                    button1_Click(null, null);
+                    button1_Click(null, null);//点击发送键
                     return true;//返回 true 以指示它已处理该键
                 }
             }
@@ -150,7 +148,7 @@ namespace WindowsFormsApplication2
             {
                 if (keyData == (Keys.Control | Keys.Enter) && !this.button1.Focused)
                 {
-                    button1_Click(null, null);
+                    button1_Click(null, null);//点击发送键
                     return true;//返回 true 以指示它已处理该键
                 }
             }
@@ -163,7 +161,7 @@ namespace WindowsFormsApplication2
             {
                 get
                 {
-                    return Environment.OSVersion.Platform == PlatformID.Unix;
+                    return Environment.OSVersion.Platform == PlatformID.Unix;//返回当前系统是否是unix系统
                 }
             }
         }
