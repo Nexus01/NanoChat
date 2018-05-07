@@ -11,7 +11,7 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 
-namespace WindowsFormsApplication2
+namespace NanoChat
 {
     public partial class Form2 : Form
     {
@@ -19,7 +19,7 @@ namespace WindowsFormsApplication2
         String ip, name,port;//传过来的ip，name和port
         IPAddress ipdomain;//传过来的domain
         Thread thread;//子线程对象
-        Socket newclient;//Socket网络对象
+        Socket newtcpclient;//Socket网络对象
         int flag ;//网络标志
         //bool unix = false;
         public Form2(Form f1,String ip,String name,String port)
@@ -27,7 +27,7 @@ namespace WindowsFormsApplication2
             this.f1 = f1;//接收登录窗口form1对象
             this.ip = ip;//接收ip字符
             this.name = name;//接收用户名字符
-            this.port = port;
+            this.port = port;//接收port字符
             InitializeComponent();
             this.textBox1.TabIndex = 0;
             Control.CheckForIllegalCrossThreadCalls = false;//关闭子线程刷新ui限制
@@ -51,13 +51,13 @@ namespace WindowsFormsApplication2
         {
             
             byte[] data = new byte[1024];//byte数据类型，用于保存接受的socket数据
-            newclient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//实例化socket对象
+            newtcpclient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//实例化socket对象
             try
             {
                 IPEndPoint ie = new IPEndPoint(IPAddress.Parse(ip), int.Parse(port));//设置ip地址与端口号
                 try
                 {
-                    newclient.Connect(ie);//开始连接
+                    newtcpclient.Connect(ie);//开始连接
                 }
                 catch (SocketException err)
                 {
@@ -69,28 +69,31 @@ namespace WindowsFormsApplication2
             }
             catch (FormatException)
             {
-                ipdomain = Dns.GetHostAddresses(ip)[0];//DNS解析域名
-                IPEndPoint ie = new IPEndPoint(ipdomain, int.Parse(port));//设置ip地址与端口号
                 try
                 {
-                    newclient.Connect(ie);//开始连接
+                    ipdomain = Dns.GetHostAddresses(ip)[0];//DNS解析域名
+                    IPEndPoint ie = new IPEndPoint(ipdomain, int.Parse(port));//设置ip地址与端口号
+                    //try
+                    //{
+                    newtcpclient.Connect(ie);//开始连接
+                    //}
                 }
                 catch (SocketException err)
                 {
                     UpdateList("与服务器无法建立连接！");//抛出异常
-                    UpdateList(err.ToString());
+                    MessageBox.Show(err.ToString());
                     flag = 1;//设置网络标志位1，也就是无法连接到网络
                     return;
                 }
             }
-            int recv = newclient.Receive(data);//接收服务器上线数据
+            int recv = newtcpclient.Receive(data);//接收服务器上线数据
             string stringdata = Encoding.UTF8.GetString(data, 0, recv);//将byte数据转化为字符类型
             UpdateList(stringdata);//传入ui数据并刷新
-            newclient.Send(BitConverter.GetBytes(OSHelper.IsUnix));//将判断是否为unix系统的结果发送给服务端
+            newtcpclient.Send(BitConverter.GetBytes(OSHelper.IsUnix));//将判断是否为unix系统的结果发送给服务端
             while (true)
             {
                 data = new byte[1024];//byte数据类型，用于保存接受的socket数据
-                recv = newclient.Receive(data);//接收消息数据
+                recv = newtcpclient.Receive(data);//接收消息数据
                 stringdata = Encoding.UTF8.GetString(data, 0, recv);//将byte数据转化为字符类型
                 UpdateList(stringdata);//传入ui数据并刷新
             }
@@ -109,9 +112,9 @@ namespace WindowsFormsApplication2
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)//点击窗口x调用该函数
         {
             if (flag==0) { //判断网络标志是否为0，也就是是否成功连接到网络。
-            newclient.Send(Encoding.UTF8.GetBytes("exitthis"));//设置字符编码为UTF-8并发送退出消息
-            newclient.Shutdown(SocketShutdown.Both);//停止socket连接
-            newclient.Close();//关闭socket连接
+            newtcpclient.Send(Encoding.UTF8.GetBytes("exitthis"));//设置字符编码为UTF-8并发送退出消息
+            newtcpclient.Shutdown(SocketShutdown.Both);//停止socket连接
+            newtcpclient.Close();//关闭socket连接
             }
             thread.Abort();//关闭子线程
             f1.Show();//显示登录窗口form1
@@ -128,7 +131,7 @@ namespace WindowsFormsApplication2
             {
                 if (flag == 0)//判断网络连接是否成功
                 {
-                    newclient.Send(Encoding.UTF8.GetBytes(name + ":" + textBox1.Text + "\n"));//发送socket消息，并编码UTF-8
+                    newtcpclient.Send(Encoding.UTF8.GetBytes(name + ":" + textBox1.Text + "\n"));//发送socket消息，并编码UTF-8
                     textBox1.Text = "";//清空发送栏
                     textBox1.Focus();//将光标聚焦在输入框
                 }

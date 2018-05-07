@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication2
+﻿namespace NanoChat
 {
     partial class Form2
     {
@@ -55,10 +55,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(806, 558);
+            this.button1.Location = new System.Drawing.Point(802, 558);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 44);
+            this.button1.Size = new System.Drawing.Size(142, 33);
             this.button1.TabIndex = 2;
             this.button1.Text = "发送";
             this.button1.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             this.comboBox1.Items.AddRange(new object[] {
             "按Enter发送信息",
             "按Ctrl+Enter发送信息"});
-            this.comboBox1.Location = new System.Drawing.Point(784, 607);
+            this.comboBox1.Location = new System.Drawing.Point(802, 608);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(186, 23);
+            this.comboBox1.Size = new System.Drawing.Size(150, 23);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Text = "按Enter发送信息";
             // 
