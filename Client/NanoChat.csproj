@@ -72,6 +72,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="about.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="about.Designer.cs">
+      <DependentUpon>about.cs</DependentUpon>
+    </Compile>
+    <Compile Include="config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="config.Designer.cs">
+      <DependentUpon>config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="feedback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="feedback.Designer.cs">
+      <DependentUpon>feedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +104,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="settings.Designer.cs">
+      <DependentUpon>settings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="about.resx">
+      <DependentUpon>about.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config.resx">
+      <DependentUpon>config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="feedback.resx">
+      <DependentUpon>feedback.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +135,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="settings.resx">
+      <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Form1.datasource" />
+    <None Include="Properties\DataSources\Form2.datasource" />
+    <None Include="Properties\DataSources\Form2.OSHelper.datasource" />
+    <None Include="Properties\DataSources\NanoChat.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\NanoChat.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,6 +174,237 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1f604.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2702.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1f4c2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1f5bc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %286%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %287%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %288%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %289%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2810%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2811%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2812%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2813%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2814%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2815%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2816%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2817%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2818%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2819%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2820%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2821%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2822%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2823%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2824%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2825%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2826%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2827%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2828%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2829%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2830%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2831%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2832%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2833%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2834%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2835%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2836%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2837%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2838%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2839%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2840%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2841%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2842%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2843%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2844%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2845%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2846%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2847%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2848%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2849%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2850%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2851%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2852%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2853%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2854%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2855%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2856%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2857%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2858%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2859%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2860%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2861%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2862%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2863%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2864%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2865%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2866%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2867%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2868%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2869%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2870%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2871%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bq %2872%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2699.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

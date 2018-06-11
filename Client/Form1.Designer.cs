@@ -37,9 +37,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.networktest = new System.Windows.Forms.RichTextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.settings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -60,7 +60,6 @@
             this.ipaddr.Name = "ipaddr";
             this.ipaddr.Size = new System.Drawing.Size(289, 25);
             this.ipaddr.TabIndex = 1;
-            this.ipaddr.Text = "127.1";
             // 
             // label1
             // 
@@ -78,7 +77,7 @@
             this.name.Margin = new System.Windows.Forms.Padding(4);
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(289, 25);
-            this.name.TabIndex = 3;
+            this.name.TabIndex = 5;
             this.name.Text = "test";
             // 
             // label2
@@ -96,8 +95,7 @@
             this.port.Location = new System.Drawing.Point(662, 138);
             this.port.Name = "port";
             this.port.Size = new System.Drawing.Size(131, 25);
-            this.port.TabIndex = 5;
-            this.port.Text = "8899";
+            this.port.TabIndex = 3;
             // 
             // label3
             // 
@@ -110,10 +108,13 @@
             // 
             // networktest
             // 
+            this.networktest.BackColor = System.Drawing.SystemColors.Window;
             this.networktest.Location = new System.Drawing.Point(6, 43);
             this.networktest.Name = "networktest";
+            this.networktest.ReadOnly = true;
             this.networktest.Size = new System.Drawing.Size(99, 34);
             this.networktest.TabIndex = 7;
+            this.networktest.TabStop = false;
             this.networktest.Text = "检测中";
             this.networktest.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
@@ -127,24 +128,13 @@
             this.label4.Text = "网络质量：";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(843, 537);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(39, 15);
-            this.linkLabel1.TabIndex = 9;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "help";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(304, 293);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(288, 25);
-            this.textBox1.TabIndex = 10;
+            this.textBox1.TabIndex = 7;
             this.textBox1.Text = "test";
             // 
             // label5
@@ -157,14 +147,25 @@
             this.label5.Text = "密码";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // settings
+            // 
+            this.settings.BackgroundImage = global::NanoChat.Properties.Resources.setting;
+            this.settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settings.Location = new System.Drawing.Point(877, 530);
+            this.settings.Name = "settings";
+            this.settings.Size = new System.Drawing.Size(40, 40);
+            this.settings.TabIndex = 12;
+            this.settings.UseVisualStyleBackColor = true;
+            this.settings.Click += new System.EventHandler(this.settings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(929, 582);
+            this.Controls.Add(this.settings);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.networktest);
             this.Controls.Add(this.label3);
@@ -177,6 +178,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "登录聊天室";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -186,17 +188,17 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox ipaddr;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox port;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox networktest;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button settings;
+        public System.Windows.Forms.TextBox ipaddr;
+        public System.Windows.Forms.TextBox port;
     }
 }
 

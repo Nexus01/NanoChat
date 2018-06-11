@@ -9,6 +9,10 @@ D:\csharp\NanoChat\Client\obj\Debug\NanoChat.application
 D:\csharp\NanoChat\Client\obj\Debug\NanoChat.exe
 D:\csharp\NanoChat\Client\obj\Debug\NanoChat.pdb
 D:\csharp\NanoChat\Client\obj\Debug\NanoChat.Properties.Resources.resources
-D:\csharp\NanoChat\Client\obj\Debug\NanoChat.Form1.resources
 D:\csharp\NanoChat\Client\obj\Debug\NanoChat.Form2.resources
 D:\csharp\NanoChat\Client\obj\Debug\NanoChat.csprojResolveAssemblyReference.cache
+D:\csharp\NanoChat\Client\obj\Debug\NanoChat.settings.resources
+D:\csharp\NanoChat\Client\obj\Debug\NanoChat.config.resources
+D:\csharp\NanoChat\Client\obj\Debug\NanoChat.feedback.resources
+D:\csharp\NanoChat\Client\obj\Debug\NanoChat.about.resources
+D:\csharp\NanoChat\Client\obj\Debug\NanoChat.Form1.resources

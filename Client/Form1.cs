@@ -17,6 +17,7 @@ namespace NanoChat
         //private delegate void UpdateStatusDelegate(string status);
         //public delegate void MyInvoke();
         Thread thread;//子线程对象
+        
         public Form1()
         {
             InitializeComponent();
@@ -34,16 +35,14 @@ namespace NanoChat
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);//注册窗口X函数事件
             this.thread = new Thread(new ThreadStart(this.netscan));//实例化子线程
             this.thread.Start();//开启子线程
+            this.ipaddr.Text = Netconfig.crossip;
+            this.port.Text = Netconfig.crossport;
         }
-        /*private void UpdateStatus(string status)
-        {
-            this.networktest.Text = status;
-        }*/
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {}
         private void netscan(){
             string ip1 = "114.114.114.114";
-            string ip2 = "8.8.8.8";
+            //string ip2 = "8.8.8.8";
             while (true)
             {
                 Ping pingSender = new Ping();
@@ -76,11 +75,6 @@ namespace NanoChat
                         {
                             counterofsuccess++;
                             delayms[counter] = int.Parse((reply.RoundtripTime).ToString());
-                            /*Console.WriteLine("Address: {0}", reply.Address.ToString());
-                            Console.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
-                            Console.WriteLine("Time to live: {0}", reply.Options.Ttl);
-                            Console.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
-                            Console.WriteLine("Buffer size: {0}", reply.Buffer.Length);*/
                         }
                         else if (reply.Status == IPStatus.DestinationUnreachable)
                             networktest.Text = "无法访问目标";
@@ -105,6 +99,7 @@ namespace NanoChat
                 {
                     //Console.WriteLine("connect success");
                     netresult = "已联网";
+                    
                     networktest.Text = netresult;
                     Thread.Sleep(1000);
                     int averagedelay = 0;
@@ -114,10 +109,17 @@ namespace NanoChat
                         averagedelay += delayms[m];
                     }
                     averagedelay = averagedelay / 13;
+                    networktest.ForeColor = Color.Green;
                     if (averagedelay > 40 && averagedelay < 70)
+                    {
                         nowsitution = situation[1];
+                        networktest.ForeColor = Color.Yellow;
+                    }
                     else if (averagedelay >= 70)
+                    {
                         nowsitution = situation[2];
+                        networktest.ForeColor = Color.Red;
+                    }
                     netresult = string.Format(averagedelay.ToString() + "ms ");
                     //BeginInvoke(new MethodInvoker(delegate()
                     //{
@@ -133,11 +135,9 @@ namespace NanoChat
                     //Console.WriteLine("the situation of the Network is  " + nowsitution);
                 }
                 else if (counterofsuccess < counteroftimeout)
-                    MessageBox.Show("请求超时");
-                //Console.WriteLine("请求超时");
+                    MessageBox.Show("请求超时，请确保网络畅通");
                 else if (counterofdisconnect > 0)
                     MessageBox.Show("请检查联网设置");
-                //Console.WriteLine("请检查联网设置");
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -181,18 +181,25 @@ namespace NanoChat
         {
 
         }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Nexus01/NanoChat");
-        }
-
         private void label5_Click(object sender, EventArgs e)
         {
 
         }
 
+        private void settings_Click(object sender, EventArgs e)
+        {
+            settings f3 = new settings(this);
+            f3.Show();
+            //f3.TopMost = true;
+            this.Hide();
+        }
+
         
  
+    }
+    public static class Netconfig
+    {
+        public static string crossip = "127.1";
+        public static string crossport = "2018";
     }
 }

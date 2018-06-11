@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,241 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1f4c2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="emoji" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1f604.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="snip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2702.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1f5bc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__10_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (10).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__11_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (11).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__12_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (12).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__13_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (13).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__14_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (14).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__15_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (15).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__16_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (16).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__17_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (17).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__18_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (18).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__19_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (19).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__20_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (20).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__21_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (21).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__22_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (22).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__23_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (23).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__24_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (24).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__25_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (25).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__26_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (26).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__27_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (27).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__28_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (28).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__29_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (29).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__2_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__30_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (30).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__31_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (31).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__32_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (32).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__33_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (33).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__34_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (34).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__35_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (35).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__36_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (36).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__37_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (37).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__38_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (38).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__39_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (39).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__3_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__40_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (40).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__41_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (41).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__42_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (42).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__43_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (43).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__44_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (44).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__45_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (45).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__46_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (46).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__47_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (47).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__48_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (48).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__49_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (49).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__4_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__50_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (50).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__51_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (51).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__52_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (52).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__53_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (53).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__54_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (54).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__55_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (55).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__56_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (56).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__57_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (57).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__58_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (58).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__59_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (59).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__5_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (5).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__60_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (60).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__61_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (61).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__62_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (62).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__63_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (63).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__64_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (64).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__65_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (65).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__66_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (66).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__67_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (67).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__68_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (68).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__69_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (69).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__6_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (6).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__70_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (70).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__71_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (71).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__72_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (72).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__7_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (7).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__8_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (8).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bq__9_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bq (9).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2699.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
