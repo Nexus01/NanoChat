@@ -17,11 +17,21 @@ namespace NanoChat
         {
             this.frm1 = frm1;
             InitializeComponent();
-            
+            this.richTextBox1.ReadOnly = true;
+            StaticTools.InsertImage(this.richTextBox1,Properties.Resources.bq__1_);
+            StaticTools.InsertImage(this.richTextBox1, Properties.Resources.bq__2_);
+            //PictureBox pb = new PictureBox();
+            //pb.Image = Properties.Resources.bq__1_;
+            //this.richTextBox1.Controls.Add(pb);
+            //PictureBox pb1 = new PictureBox();
+            //pb1.Image = Properties.Resources.bq__10_;
+            //this.richTextBox1.Controls.Add(pb1);
         }
         private void settings_Load(object sender, EventArgs e)//窗口初始化函数
         {
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.settings_FormClosing);//注册窗口X事件
+            //richTextBox1.AppendText(Properties.Resources.bq__1_);
+            
         }
         private void settings_FormClosing(object sender, FormClosingEventArgs e)//点击窗口x调用该函数
         {
@@ -63,8 +73,7 @@ namespace NanoChat
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
-            Form1 f1 = new Form1();
-            f1.Show();
+            frm1.Show();
         }
     }
 }

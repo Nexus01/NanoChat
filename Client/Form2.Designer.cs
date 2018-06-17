@@ -59,9 +59,9 @@
             this.comboBox1.Items.AddRange(new object[] {
             "按Enter发送",
             "按Ctrl+Enter发送"});
-            this.comboBox1.Location = new System.Drawing.Point(866, 627);
+            this.comboBox1.Location = new System.Drawing.Point(857, 627);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 23);
+            this.comboBox1.Size = new System.Drawing.Size(168, 23);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Text = "按Enter发送";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);

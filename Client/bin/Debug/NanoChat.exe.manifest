@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NanoChat.exe" size="141312">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NanoChat.exe" size="145408">
       <assemblyIdentity name="NanoChat" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VrfeILiGNdX0VhK9xMnhtoCOaMPFnZ4jGg6yz+SLn1s=</dsig:DigestValue>
+        <dsig:DigestValue>1a0enzwg8lOW9gEyxzT4W8Eg7i8KRRH7XJzXiL0TW+U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

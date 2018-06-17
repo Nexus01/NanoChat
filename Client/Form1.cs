@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.NetworkInformation;
+using System.IO;
 
 namespace NanoChat
 {
@@ -17,7 +18,7 @@ namespace NanoChat
         //private delegate void UpdateStatusDelegate(string status);
         //public delegate void MyInvoke();
         Thread thread;//子线程对象
-        
+        //public static Form1 form1;
         public Form1()
         {
             InitializeComponent();
@@ -33,14 +34,29 @@ namespace NanoChat
         private void Form1_Load(object sender, EventArgs e)//窗口初始化函数
         {
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);//注册窗口X函数事件
-            this.thread = new Thread(new ThreadStart(this.netscan));//实例化子线程
+            this.thread = new Thread(new ThreadStart(netscan));//实例化子线程
             this.thread.Start();//开启子线程
-            this.ipaddr.Text = Netconfig.crossip;
-            this.port.Text = Netconfig.crossport;
+            
+            if (!Netconfig.fileinfo.Exists)
+            {
+                using (StreamWriter sw = Netconfig.fileinfo.CreateText())
+                {
+                    sw.WriteLine(Netconfig.crossip);
+                    sw.WriteLine(Netconfig.crossport);
+                    sw.WriteLine("TempUser");
+                    sw.WriteLine("false");
+                }
+            }
+            using (StreamReader configreader = Netconfig.fileinfo.OpenText())
+            {
+                    this.ipaddr.Text = configreader.ReadLine();
+                    this.port.Text = configreader.ReadLine();
+                    this.name.Text = configreader.ReadLine();
+                    this.checkBox1.Checked = Convert.ToBoolean(configreader.ReadLine());
+            }
         }
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {}
-        private void netscan(){
+        public void netscan()
+        {
             string ip1 = "114.114.114.114";
             //string ip2 = "8.8.8.8";
             while (true)
@@ -99,7 +115,7 @@ namespace NanoChat
                 {
                     //Console.WriteLine("connect success");
                     netresult = "已联网";
-                    
+
                     networktest.Text = netresult;
                     Thread.Sleep(1000);
                     int averagedelay = 0;
@@ -140,6 +156,10 @@ namespace NanoChat
                     MessageBox.Show("请检查联网设置");
             }
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {}
+        
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -164,6 +184,30 @@ namespace NanoChat
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)//点击窗口x调用该函数
         {
+            
+            using(StreamReader namereader=new StreamReader(Netconfig.fileinfo.ToString()))
+            {
+                Netconfig.crossip = namereader.ReadLine();
+                Netconfig.crossport = namereader.ReadLine();
+            }
+            using (StreamWriter namewriter = new StreamWriter(Netconfig.fileinfo.ToString()))
+            {
+                namewriter.WriteLine(Netconfig.crossip);
+                namewriter.WriteLine(Netconfig.crossport);
+                if (!checkBox1.Checked)
+                    namewriter.WriteLine("");
+                else 
+                {
+                    if (this.name.Text != "")
+                        namewriter.WriteLine(this.name.Text);
+                    else
+                    {
+                        MessageBox.Show("要记住的用户名不能为空，暂时将用户名保存为\"Nobody\"");
+                        namewriter.WriteLine("Nobody");
+                    }
+                 }
+                namewriter.WriteLine((this.checkBox1.Checked).ToString());
+            }
             if (DialogResult.No == MessageBox.Show("您确定要退出登录吗?", "聊天室", MessageBoxButtons.YesNo, MessageBoxIcon.Question))//弹出提示
             {
                 e.Cancel = true;
@@ -194,12 +238,30 @@ namespace NanoChat
             this.Hide();
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (!Netconfig.fileinfo.Exists)
+            //{
+            //    using (StreamWriter namewriter = new StreamWriter(Netconfig.fileinfo.ToString(), true))
+            //    {
+            //        namewriter.WriteLine(this.name.Text);
+            //        namewriter.WriteLine((this.checkBox1.Checked).ToString());
+            //    }
+            //}
+            //else
+            //{
+                
+            //}
+
+        }
+
         
  
     }
     public static class Netconfig
     {
-        public static string crossip = "127.1";
+        public static string crossip = "127.0.0.1";
         public static string crossport = "2018";
+        public static FileInfo fileinfo = new FileInfo(@"./defaultconfig.txt");
     }
 }

@@ -15,12 +15,12 @@ namespace NanoChat
         public feedback()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate("https://www.zhihu.com");
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-        }
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
             //webBrowser1.Navigate("https://github.com/Nexus01/NanoChat/issues/new");
+            //this.webBrowser1.ScriptErrorsSuppressed = true;
+        }
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Nexus01/NanoChat/issues/new");
         }
     }
 }
