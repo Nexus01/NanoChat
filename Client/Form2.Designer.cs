@@ -105,6 +105,7 @@
             this.button4.Size = new System.Drawing.Size(33, 32);
             this.button4.TabIndex = 8;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -167,7 +168,7 @@
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
-            this.Text = "聊天室";
+            this.Text = "NanoChat 0.0.1 --聊天室";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
 

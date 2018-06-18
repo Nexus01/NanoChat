@@ -18,8 +18,6 @@ namespace NanoChat
             this.frm1 = frm1;
             InitializeComponent();
             this.richTextBox1.ReadOnly = true;
-            StaticTools.InsertImage(this.richTextBox1,Properties.Resources.bq__1_);
-            StaticTools.InsertImage(this.richTextBox1, Properties.Resources.bq__2_);
             //PictureBox pb = new PictureBox();
             //pb.Image = Properties.Resources.bq__1_;
             //this.richTextBox1.Controls.Add(pb);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace NanoChatServer
 {
@@ -53,6 +54,24 @@ namespace NanoChatServer
             Array.Copy(srcArray3, 0, newArray, srcArray1.Length + srcArray2.Length, srcArray3.Length);
             Array.Copy(srcArray4, 0, newArray, srcArray1.Length + srcArray2.Length + srcArray3.Length, srcArray4.Length);
             return newArray;
+        }
+        public static byte[] CombomBinaryArray(byte[] srcArray1, byte[] srcArray2, byte[] srcArray3, byte[] srcArray4, byte[] srcArray5)//连接5个字节数组
+        {
+            byte[] newArray = new byte[srcArray1.Length + srcArray2.Length + srcArray3.Length + srcArray4.Length + srcArray5.Length];
+            Array.Copy(srcArray1, 0, newArray, 0, srcArray1.Length);
+            Array.Copy(srcArray2, 0, newArray, srcArray1.Length, srcArray2.Length);
+            Array.Copy(srcArray3, 0, newArray, srcArray1.Length + srcArray2.Length, srcArray3.Length);
+            Array.Copy(srcArray4, 0, newArray, srcArray1.Length + srcArray2.Length + srcArray3.Length, srcArray4.Length);
+            Array.Copy(srcArray5, 0, newArray, srcArray1.Length + srcArray2.Length + srcArray3.Length + srcArray4.Length, srcArray5.Length);
+            return newArray;
+        }
+        public static string AppendTimeStamp(string fileName)//在文件尾部加入时间戳
+        {
+            return string.Concat(
+                Path.GetFileNameWithoutExtension(fileName),
+                DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+                Path.GetExtension(fileName)
+                );
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
-
+using System.Net.Sockets;
 
 namespace NanoChat
 {
@@ -49,7 +49,7 @@ namespace NanoChat
             System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
             return img;
         }
-        public static byte[] GetPictureBytes(string filename)       //filename填写图片路径  
+        public static byte[] GetFileBytes(string filename)       //filename填写图片路径  
         {
             FileInfo fileInfo = new FileInfo(filename);
             byte[] buffer = new byte[fileInfo.Length];
@@ -75,7 +75,13 @@ namespace NanoChat
         {
             bool b = rtb1.ReadOnly;
             //Image img = Image.FromFile("sss.bmp");
-            Clipboard.SetDataObject(img);
+            try
+            {
+                Clipboard.SetDataObject(img);
+            }
+            catch (Exception ee) {
+                MessageBox.Show(ee.Message);
+            }
             rtb1.ReadOnly = false;
             rtb1.Paste(DataFormats.GetFormat(DataFormats.Bitmap));
             rtb1.ReadOnly = b;
@@ -93,6 +99,77 @@ namespace NanoChat
                     return Environment.OSVersion.Platform == PlatformID.Unix;//返回当前系统是否是unix系统
                 }
             }
+        }
+        public static string AppendTimeStamp(string fileName)//在文件尾部加入时间戳
+        {
+            return string.Concat(
+                Path.GetFileNameWithoutExtension(fileName),
+                DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+                Path.GetExtension(fileName)
+                );
+        }
+        public static string ReceivePic(int rect,string sendside,byte[] data,Socket tsocket){
+                FileStream wrtr; //文件读写类  
+                //server.Listen(10); //监听  
+                //Socket s = server.Accept(); //当有客户端与服务器进行连接，Accept方法返回socket对象，通过该对象可以获取客户端发送的消息  
+                //byte[] data = new byte[4];  
+                //int rect = tsocket.Receive(data, 2, 4, 0); //用来接收图片字节流长度  
+                int size = BitConverter.ToInt32(data, 2);  //16进制转成int型  
+                int dataleft = size;   
+                data = new byte[size];  //创建byte组
+                string filepath = @"./savepicture/new in.png";
+                string foldpath = Path.GetDirectoryName(filepath);
+                Directory.CreateDirectory(foldpath);//如果没有文件夹，则创建
+                //filepath = StaticTools.AppendTimeStamp(filepath);
+                filepath = Path.Combine(foldpath, StaticTools.AppendTimeStamp(filepath));//加入时间戳，并与前置路径连接
+                wrtr = new FileStream(filepath , FileMode.Create);
+                //创建新文件"new.jpg",strPath是路径   
+                //data = new byte[2048];
+                int total = 0;  
+                while (total < size)   //当接收长度小于总长度时继续执行  
+                {  
+                rect = tsocket.Receive(data, total, dataleft, 0);    //接收字节流，receive方法返回int获取已接收字节个数，第一个参数是需要写入的字节组，第二个参数是起始位置，第三个参数是接收字节的长度  
+                total += rect;            //已接收个数-下一次从当前个数开始接收  
+                dataleft -= rect;  //剩下的字节长度  
+                }  
+                wrtr.Write(data, 0, data.Length); //输出文件  
+                wrtr.Flush();  //强制输出
+                wrtr.Close();  //关闭文件流对象
+                return filepath;
+                }
+        //public static string defaultpicpath = @"./savepicture";
+        //public static string defaultfilepath = @"./savefile";
+        public static string ReceiveFile(int rect, string sendside, string fileext, byte[] data, Socket tsocket)
+        {
+            FileStream wrtr; //文件读写类  
+            //server.Listen(10); //监听  
+            //Socket s = server.Accept(); //当有客户端与服务器进行连接，Accept方法返回socket对象，通过该对象可以获取客户端发送的消息  
+            //byte[] data = new byte[4];  
+            //int rect = tsocket.Receive(data, 2, 4, 0); //用来接收图片字节流长度  
+            int size = BitConverter.ToInt32(data, 2);  //16进制转成int型  
+            int dataleft = size;
+            data = new byte[size];  //创建byte组
+            string filepath = @"./savefile/newfile in ";
+            string foldpath = Path.GetDirectoryName(filepath);
+            Directory.CreateDirectory(foldpath);//如果没有文件夹，则创建
+            //filepath = StaticTools.AppendTimeStamp(filepath);
+            filepath = Path.Combine(foldpath, StaticTools.AppendTimeStamp(filepath));//加入时间戳，并与前置路径连接
+            filepath = Path.ChangeExtension(filepath, fileext);
+            wrtr = new FileStream(filepath, FileMode.Create);
+            //创建新文件"new.jpg",strPath是路径   
+            //data = new byte[2048];
+            int total = 0;
+            while (total < size)   //当接收长度小于总长度时继续执行  
+            {
+                rect = tsocket.Receive(data, total, dataleft, 0);    //接收字节流，receive方法返回int获取已接收字节个数，第一个参数是需要写入的字节组，第二个参数是起始位置，第三个参数是接收字节的长度  
+                total += rect;            //已接收个数-下一次从当前个数开始接收  
+                dataleft -= rect;  //剩下的字节长度  
+            }
+            wrtr.Write(data, 0, data.Length); //输出文件  
+            wrtr.Flush();  //强制输出
+            wrtr.Close();  //关闭文件流对象
+            //File.Delete(strpath);
+            return filepath;
         }
     }
 }

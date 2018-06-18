@@ -42,6 +42,7 @@ namespace NanoChat
 
         private void Form2_Load(object sender, EventArgs e)//窗口初始化函数
         {
+            this.Text="NanoChat 0.0.1 --登录聊天室 "+ip+":"+port+" 用户名 "+name;
             netflag = 0;//默认网络标志位0，表示接通网络
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);//注册窗口X事件
             ToolTip toolTip1 = new ToolTip();
@@ -112,7 +113,8 @@ namespace NanoChat
                 }
             }
             byte[] temp;
-            temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(StaticTools.OSHelper.IsUnix), Encoding.UTF8.GetBytes(name.ToCharArray()));
+            //temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(StaticTools.OSHelper.IsUnix), Encoding.UTF8.GetBytes(name.ToCharArray()));
+            temp = Encoding.UTF8.GetBytes(name.ToCharArray());
             newtcpclient.Send(temp);//将判断是否为unix系统的结果和用户名发送给服务端
             int recv = newtcpclient.Receive(data);//接收服务器上线数据
             //MessageBox.Show(recv.ToString());
@@ -129,13 +131,20 @@ namespace NanoChat
                     recv = newtcpclient.Receive(temppattern);
                     if(Convert.ToBoolean(temppattern[0]))
                     {
-                        if (Convert.ToBoolean(temppattern[1]))//文件
+                        if (Convert.ToBoolean(temppattern[1]))//闲置
                         {
 
                         }
-                        else//图
+                        else//文件
                         {
-                        
+                            sendside = Encoding.UTF8.GetString(temppattern, 10, recv);
+                            MessageBox.Show("prepare to receive the file "+sendside);
+                            string fileext = Encoding.UTF8.GetString(temppattern, 6, 4);
+                            string DefaultFilePath = StaticTools.ReceiveFile(recv, sendside,fileext, temppattern, newtcpclient);
+                            MessageBox.Show("Receive File Success");
+                            UpdateFile(sendside, DefaultFilePath);
+                            firstflag = false;
+                            temppattern = new byte[2048];
                         }
                     }
                     else
@@ -179,7 +188,7 @@ namespace NanoChat
 
         private void Updatetext(String messg)//ui刷新函数，传入值为消息
         {
-            this.richTextBox1.Update(); //.BeginUpdate();//开始刷新
+            this.richTextBox1.Update(); //.BeginUpdate();//重绘
             RichTextBox lvi=new RichTextBox();
             lvi.Text = messg;//设置item对象文本值
             this.richTextBox1.AppendText(lvi.Text);//Add(lvi);//添加item对象
@@ -195,16 +204,16 @@ namespace NanoChat
             Image tempemoji=Properties.Resources.emoji;
             //string temptext = sendside + ":\n\n";
             lvi.Text = "\n"+sendside+"\n";//设置item对象文本值
-            //try
-            //{
-            //    ResourceManager rm = new ResourceManager(typeof(Properties.Resources));//读取Resource文件中嵌入的图片文件
-            //    tempemoji= (Image)rm.GetObject("bq__"+emojinumber.ToString() + "_");
-            //}
-            //catch(Exception e)
-            //{
-            //    MessageBox.Show("异常" + e.Message);
-            //}
-            tempemoji = LikeResourceManager.LoadEmoji(emojinumber);
+            try
+            {
+                ResourceManager rm = new ResourceManager(typeof(Properties.Resources));//读取Resource文件中嵌入的图片文件
+                tempemoji = (Image)rm.GetObject("bq__" + emojinumber.ToString() + "_");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("异常" + e.Message);
+            }
+            //tempemoji = LikeResourceManager.LoadEmoji(emojinumber);
             richTextBox1.AppendText(lvi.Text);
             richTextBox1.AppendText(":\n");
             StaticTools.InsertImage(this.richTextBox1,tempemoji);
@@ -215,10 +224,28 @@ namespace NanoChat
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
         }
+        private void UpdateFile(String sendside,string filepath)//ui刷新函数，传入值为消息
+        {
+            this.richTextBox1.Update(); //.BeginUpdate();//开始刷新
+            RichTextBox lvi = new RichTextBox();
+            PictureBox pic = new PictureBox();
+            lvi.Text = "\n"+sendside+"\n";//设置item对象文本值
+            this.richTextBox1.AppendText(lvi.Text);//Add(lvi);//添加item对象
+            richTextBox1.AppendText(":\n");
+            //this.richrichTextBox2. //.EndUpdate();//停止刷新
+            //this.richrichTextBox2.Focus();
+            if (Path.GetExtension(filepath).Contains(".png") || Path.GetExtension(filepath).Contains(".jpg") || Path.GetExtension(filepath).Contains(".jpeg"))
+            StaticTools.InsertImage(richTextBox1,Image.FromFile(filepath));
+            richTextBox1.AppendText("\n");
+            richTextBox1.AppendText("文件保存于 " +Path.GetFullPath(filepath));
+            richTextBox1.AppendText("\n");
+            richTextBox1.SelectionStart = richTextBox1.Text.Length;
+            richTextBox1.ScrollToCaret();
+        }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)//点击窗口x调用该函数
         {
             if (netflag==0) { //判断网络标志是否为0，也就是是否成功连接到网络。
-            newtcpclient.Send(Encoding.UTF8.GetBytes("exitthis"));//设置字符编码为UTF-8并发送退出消息
+            newtcpclient.Send(StaticTools.CombomBinaryArray( BitConverter.GetBytes(firstflag),BitConverter.GetBytes(nextflag),Encoding.UTF8.GetBytes("exitthis")));//设置字符编码为UTF-8并发送退出消息
             newtcpclient.Shutdown(SocketShutdown.Both);//停止socket连接
             newtcpclient.Close();//关闭socket连接
             }
@@ -237,23 +264,12 @@ namespace NanoChat
             {
                 if (netflag == 0)//判断网络连接是否成功
                 {
-                    //for(int i=0;i<richTextBox2.Rtf.Length;i++)
-                    if(richTextBox2.Rtf.IndexOf(@"{\pict\") > -1)
-                    {
-                        pictidx[0]=richTextBox2.Rtf.IndexOf(@"{\pict\");
-                        //MessageBox.Show(String.Format("图片位置为{0}",pictidx[0].ToString()) );
-                        MessageBox.Show("发送表情或者图片请点击左侧相应的按钮");
-                        richTextBox2.Text = "";//清空发送栏
-                    }
-                    
-                    if(!richTextBox2.Text.Equals("")){
-                    byte[] tosend=Encoding.UTF8.GetBytes("\n"+name + ":\n" + richTextBox2.Text + "\n");
-                    byte[] temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(firstflag),BitConverter.GetBytes(nextflag),tosend);
-                    newtcpclient.Send(temp);//发送socket消息，并编码UTF-8
-                    }
+                        byte[] tosend = Encoding.UTF8.GetBytes("\n" + name + ":\n" + richTextBox2.Text + "\n");
+                        byte[] temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(firstflag), BitConverter.GetBytes(nextflag), tosend);
+                        newtcpclient.Send(temp);//发送socket消息，并编码UTF-8
                     richTextBox2.Text = "";//清空发送栏
                     pictobyte.Clear();//清空表情转字节流的缓存区
-                    richTextBox2.Focus();//将光标聚焦在输入框
+                    richTextBox2.Focus();//将光标聚焦在输入框                    
                 }
             }
         }
@@ -292,16 +308,16 @@ namespace NanoChat
                     picBox.SizeMode = PictureBoxSizeMode.CenterImage;
                     int emojinumber = (i + 1) * (j + 1);
                     //string tempath = "bq__" + emojinumber.ToString() + "_";
-                    //try
-                    //{
-                    //    ResourceManager rm = new ResourceManager(typeof(Properties.Resources));//读取Resource文件中嵌入的图片文件
-                    //    picBox.Image = (Image)rm.GetObject("bq__" + emojinumber.ToString() + "_");
-                    //}
-                    //catch (Exception ee)
-                    //{
-                    //    MessageBox.Show("异常" + ee.Message);
-                    //}
-                    picBox.Image = LikeResourceManager.LoadEmoji(emojinumber);
+                    try
+                    {
+                        ResourceManager rm = new ResourceManager(typeof(Properties.Resources));//读取Resource文件中嵌入的图片文件
+                        picBox.Image = (Image)rm.GetObject("bq__" + emojinumber.ToString() + "_");
+                    }
+                    catch (Exception ee)
+                    {
+                        MessageBox.Show("异常" + ee.Message);
+                    }
+                    //picBox.Image = LikeResourceManager.LoadEmoji(emojinumber);
                     Size controlSize = new Size(32, 32);
                     picBox.Size = controlSize;
                     picBox.Click += new System.EventHandler(pictureBox_Click);
@@ -334,11 +350,12 @@ namespace NanoChat
             //byte[] tempemoji = new byte[2048];
             //byte[] tempemoji=StaticTools.BmpConvertByte(clickemoji);
             //int tempsize = tempemoji.Length;
-            //byte[] size=new byte[4];
+            byte[] size=new byte[4];
             byte[] selectidx=new byte[4];
             bool createidxofemoji;
             if(!(createidxofemoji=StaticTools.ConvertIntToByteArray(int.Parse(emojinumber),ref selectidx)))
                 return;
+
             nextflag = true;
             newtcpclient.Send(StaticTools.CombomBinaryArray(BitConverter.GetBytes(firstflag), BitConverter.GetBytes(nextflag),selectidx));
             //newtcpclient.Send(tempemoji);
@@ -362,46 +379,7 @@ namespace NanoChat
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //初始化一个OpenFileDialog类 
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.jpeg)|*.jpeg";
-            //判断用户是否正确的选择了文件 
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                //获取用户选择文件的后缀名 
-                string extension = Path.GetExtension(fileDialog.FileName);
-                //声明允许的后缀名 
-
-                string[] str = new string[] { ".png", ".jpeg", ".jpg" };
-                if (!str.Contains(extension))
-                {
-                    MessageBox.Show("仅能上传png/jpeg/jpg格式的图片！");
-                }
-                else
-                {
-                    //获取用户选择的文件，并判断文件大小不能超过20K，fileInfo.Length是以字节为单位的 
-                    FileInfo fileInfo = new FileInfo(fileDialog.FileName);
-                    if (fileInfo.Length > 2048000)
-                    {
-                        MessageBox.Show("上传的图片不能大于2000K");
-                    }
-                    else//在这里就可以写获取到正确文件后的代码了
-                    {
-                        string filepath = Path.GetFullPath(fileDialog.FileName);
-                        byte[] bytes = StaticTools.GetPictureBytes(filepath); //图片路径，转成字节流  
-                        MessageBox.Show("创建字节流成功"+filepath);
-                        //client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//实例化Socket对象  
-                        //client.Connect(iep);//与该ip地址进行连接  
-                        byte[] datasize = new byte[4];
-                        datasize = BitConverter.GetBytes(bytes.Length);    //把长度作为16进制数放在datasize中  
-                        byte[] temp=new byte[6];
-                        temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(true),BitConverter.GetBytes(false),datasize);
-                        newtcpclient.Send(temp);      //发送字节流长度给服务器  
-                        newtcpclient.Send(bytes, bytes.Length, SocketFlags.None);  //发送图片字节 
-                    }
-                }
-            } 
-
+            
         }
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
@@ -410,6 +388,45 @@ namespace NanoChat
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //初始化一个OpenFileDialog类 
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            //fileDialog.Filter = "(*.png)|*.png|(*.jpg)|*.jpg|(*.jpeg)|*.jpeg";
+            //判断用户是否正确的选择了文件 
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //获取用户选择文件的后缀名 
+                string extension = Path.GetExtension(fileDialog.FileName);
+                //声明允许的后缀名 
+                    //获取用户选择的文件，并判断文件大小不能超过2000K，fileInfo.Length是以字节为单位的 
+                    FileInfo fileInfo = new FileInfo(fileDialog.FileName);
+                    if (fileInfo.Length > 2048000)
+                    {
+                        MessageBox.Show("上传的文件不能大于2000K");
+                    }
+                    else//在这里就可以写获取到正确文件后的代码了
+                    {
+                        string filepath = Path.GetFullPath(fileDialog.FileName);
+                        byte[] bytes = StaticTools.GetFileBytes(filepath); //图片路径，转成字节流  
+                        
+                        MessageBox.Show("创建字节流成功" + filepath);
+                        byte[] fileext = new byte[4];
+                        fileext = Encoding.UTF8.GetBytes(Path.GetExtension(filepath));
+                        //client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//实例化Socket对象  
+                        //client.Connect(iep);//与该ip地址进行连接  
+                        byte[] datasize = new byte[4];
+                        datasize = BitConverter.GetBytes(bytes.Length);    //把长度作为16进制数放在datasize中  
+                        byte[] temp = new byte[6];
+                        temp = StaticTools.CombomBinaryArray(BitConverter.GetBytes(true), BitConverter.GetBytes(false), datasize,fileext);
+                        newtcpclient.Send(temp);      //发送字节流长度给服务器  
+                        newtcpclient.Send(bytes, bytes.Length, SocketFlags.None);  //发送图片字节 
+                    }
+                //}
+            } 
 
         }
     }
